@@ -1,0 +1,16 @@
+body {
+  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+}
+
+main>.card {
+  padding:20px;
+}
+
+canvas {
+  border: 2px dashed green;
+  margin:10px;
+}
+
+a {
+  color: #00B7FF;
+}
