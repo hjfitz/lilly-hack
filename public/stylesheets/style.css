@@ -22,3 +22,17 @@ a {
 .hidden {
   display:none;
 }
+
+.selPara {
+  display:inline;
+}
+
+.jscolor {
+  margin-top:10px!important;
+  border-radius:5px!important;
+  padding-left:10px!important;
+}
+
+input {
+  width:200px!important;
+}
