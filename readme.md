@@ -25,3 +25,10 @@ After attending the conference, I learnt about a number of technologies that wou
 
 ## The Blog
 Like anyone who uses atom and has a fancy .io domain, I'm going to blog my experiences with competing in the Lilly hackathon. The engine I wrote is a little basic, but it's available [here](https://hjf.io/blog/blog.php).
+
+
+## Notes
+
+- Use ```heroku config --app lilly-hack-hjf``` to find the DB URL
+  * This should be left in a file called ```.env```, with DATABASE_URL="$response" as a line in the file.
+- Don't use ```npm start``` to start the server, use ```heroku local```
