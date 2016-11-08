@@ -103,3 +103,82 @@ drawTrousers(trouserCol);
 drawArms(ctx,teeCol);
 //draw shoes
 drawShoes(shoeCol);
+
+var
+  hairinput = document.getElementById("hair_color"),
+  eyeinput  = document.getElementById("eye_color"),
+  skinput   = document.getElementById('skin_color'),
+  teeinput  = document.getElementById('tee_color'),
+  trouinput = document.getElementById('trouser_color'),
+  shoeinput = document.getElementById("shoe_color")
+;
+
+$(hairinput).on('input',null,null,changeHair);
+
+//hairinput.addEventListener('oninput', changeHair);
+eyeinput.addEventListener('input',  changeEye);
+skinput.addEventListener('input',   changeSkin);
+teeinput.addEventListener('input',  changeTee);
+trouinput.addEventListener('input', changeTrou);
+shoeinput.addEventListener('input', changeShoe);
+console.log('oi');
+changeHair();
+
+var changeBtn = document.getElementById("btnChange");
+changeBtn.addEventListener("click", changeMan);
+
+function changeMan() {
+  console.log("change invoked");
+  //ctx.clearRect(0, 0, canvas.width, canvas.height);
+  hairCol = "#" + document.getElementById("hair_color").value;
+  eyeCol  = "#" + document.getElementById("eye_color").value;
+  skinCol   = "#" + document.getElementById('skin_color').value;
+  teeCol  = "#" + document.getElementById('tee_color').value;
+  trouserCol = "#" + document.getElementById('trouser_color').value;
+  shoeCol = "#" + document.getElementById("shoe_color").value;
+  drawRect(120,60,60,40, hairCol);
+  //give the person a face and a neck
+  drawSkin(skinCol);
+  //they can't see!
+  drawEyes(eyeCol);
+  //draw body
+  drawRect(110,135,80,130,teeCol);
+  //draw trousers
+  drawTrousers(trouserCol);
+  //draw arms
+  drawArms(ctx,teeCol);
+  //draw shoes
+  drawShoes(shoeCol);
+  pushDB(hairCol,eyeCol,skincol,teeCol,trouserCol,shoeCol);
+}
+
+function pushDB(hair,eye,skin,tee,trou,shoe) {
+  //post request to push to db and we're sorted for this one!
+  //TODO: need to pull user preferences from database on page load. should edit /router/index.js
+}
+
+
+function changeHair() {
+ console.log("hair invoked");
+
+}
+
+function changeEye() {
+
+}
+
+function changeSkin() {
+
+}
+
+function changeTee() {
+
+}
+
+function changeTrou() {
+
+}
+
+function changeShoe() {
+
+}

@@ -8,6 +8,9 @@ Todos are based around ideas from 'The Health Challenge'
 ## The Codebase
 After attending the conference, I learnt about a number of technologies that would be very applicable to this idea of mine. There are also some things of my own that I'm taking with me.
 
+[![MIT licensed](https://img.shields.io/badge/license-MIT-blue.svg)](https://raw.githubusercontent.com/hyperium/hyper/master/LICENSE)
+
+
 ### Requirements/Technologies Used
 - Express.js
   * I found this a great way of dynamically creating pages with a sort of skeleton outline - ```layout.hbs```
@@ -32,3 +35,4 @@ Like anyone who uses atom and has a fancy .io domain, I'm going to blog my exper
 - Use ```heroku config --app lilly-hack-hjf``` to find the DB URL
   * This should be left in a file called ```.env```, with DATABASE_URL="$response" as a line in the file.
 - Don't use ```npm start``` to start the server, use ```heroku local```
+- To view the page in action, it's hosted on [heroku](http://lilly-hack-hjf.herokuapp.com)
