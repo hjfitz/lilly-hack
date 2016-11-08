@@ -32,23 +32,50 @@ router.get('/create',
       });
 });
 
+router.post('/create/login',
+  function(req,res,next) {
+    var results = [];
+    var resp;
+    pg.connect(process.env.DATABASE_URL, function(err, client) {
+      if (err) throw err;
+        client
+          .query('select * from USERS where user_name = $1 and user_pass = $2',[req.body.uName, req.body.uPass])
+          .on('row', function(row) {
+       results.push(row);
+       res.send(results);
+     })
+     if (results.length >= 1) {
+       resp = "logged in!";
+       //localStorage.setItem("logged in", true);
+       //localStorage.setItem("username", req.body.uName);
+     } else {
+       resp = "error";
+     }
+     res.send(results);
+   }
+  );
+});
 
-router.post('/insert', function(req, res) {
+
+router.post('/insert/create', function(req, res) {
   //connect to database
-  var dateCreated = new Date();
-  var day = dateCreated.getDate();
-  var month = dateCreated.getMonth();
-  var year = dateCreated.getFullYear();
-  var dateInsert = year + "-" + month + "-" + day;
-  pg.connect(process.env.DATABASE_URL, function(err, client) {
-     if (err) throw err;
-     client
+  //i bring you, the hacky method
+  if (req.body.type == "signup") {
+    var dateCreated = new Date();
+    var day = dateCreated.getDate();
+    var month = dateCreated.getMonth();
+    var year = dateCreated.getFullYear();
+    var dateInsert = year + "-" + month + "-" + day;
+    pg.connect(process.env.DATABASE_URL, function(err, client) {
+      if (err) throw err;
+      client
         //insert data using prepared statement
        .query('INSERT INTO USERS (user_name, user_pass, user_created, user_health, user_exp) VALUES ($1, $2, $3, 1000, 0)', [req.body.uName, req.body.uPass, dateInsert])
        .on('end', function(){
          res.send('success');
        });
    });
+ }
 });
 
 

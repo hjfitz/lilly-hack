@@ -24,21 +24,33 @@ function createAcct() {
 
 function submit() {
   var isCreate;
-  if (subBtn.textContent == "Login") {
-    isCreate = true;
-  } else {
-    isCreate = false; //not really necessary as an empty var == false
-  }
   userName = document.getElementById("user_name").value;
   userPass = document.getElementById("pass").value;
-  console.log(userName);
-  $.post('/insert',
-    {
-      uName: userName,
-      uPass: userPass,
-      type:  isCreate
-    },
-    function(){
-      location.reload(true);  //reload the page from server (not cache)
-    });
+  if (subBtn.textContent == "Login") {
+    isCreate = "login";
+    $.post('/create/login',
+      {
+        uName: userName,
+        uPass: userPass,
+        type:  isCreate
+      },
+      function(data){
+        //location.reload(true);  //reload the page from server (not cache)
+        console.log(data);
+      });
+  } else {
+    isCreate = "signup"; //not really necessary as an empty var == false
+    $.post('/insert/create',
+      {
+        uName: userName,
+        uPass: userPass,
+        type:  isCreate
+      },
+      function(data){
+        //location.reload(true);  //reload the page from server (not cache)
+        console.log(data);
+      });
+  }
+
+
 }
