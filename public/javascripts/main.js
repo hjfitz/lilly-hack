@@ -46,13 +46,25 @@ function submit() {
       function(data){
         //location.reload(true);  //reload the page from server (not cache)
         console.log(data);
+        //var arr = [1,2,3];
+        console.log(data[0]);
         if (data.length != 1) {
           window.errorbox.classList.toggle("hidden");
           window.error.textContent = "There's been an error! User doesn't exist!";
           window.errorDebug.textContent = data;
         } else {
-          localStorage.setItem("lillyUserInfo", data);
-          window.location = "/create";
+          var
+            username = data[0].user_name,
+            userid = data[0].user_id,
+            exp = data[0].user_exp,
+            health = data[0].user_health
+          ;
+          console.log(userid);
+          localStorage.setItem("username", username);
+          localStorage.setItem("userid", userid);
+          localStorage.setItem("userExp", exp);
+          localStorage.setItem("userHealth", health);
+        //window.location = "/create";
         }
       });
   } else {

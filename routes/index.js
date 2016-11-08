@@ -78,21 +78,29 @@ router.post('/insert/create', function(req, res) {
  }
 });
 
-
-
-
-
-
-var foo = 22/7;
-router.get('/test', function(req,res,next) {
-  //res.render first arg is the view.hbs, second are arguments
-  res.render('test',
-    {
-      title: 'testo',
-      parama: 'oioi',
-      innit: foo
-    }
-  );
+router.post('/create/update', function (req,res) {
+  var results;
+  pg.connect(process.env.DATABASE_URL, function(err, client) {
+    if (err) throw err;
+    client
+    .query('SELECT * FROM PREFERENCES WHERE user_id = \''+req.body.userId+'\'')
+    .on('end', function(row) {
+      //res.send(row.length);
+      results = row;
+        console.log("starts to invoke ");
+        client
+        .query('INSERT INTO PREFERENCES (user_id, skinCol, hairCol, teeCol, trouserCol, eyeCol, shoeCol) VALUES (\''+req.body.userId+'\', \''+req.body.skinCol+'\', \''+req.body.hairCol+'\', \''+req.body.teeCol+'\', \''+req.body.trouCol+'\', \''+req.body.eyeCol+'\', \''+req.body.shoeCol+'\')')
+        .on('end', function() {
+          res.send('success inserting!');
+          console.log("inserted");
+        });
+      //console.log("oioioioioioio");
+      //console.log(results);
+    });
+    console.log("can insert");
+  });
 });
+
+
 
 module.exports = router;

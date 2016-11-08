@@ -25,14 +25,19 @@ After attending the conference, I learnt about a number of technologies that wou
   * I think that being able to press f5 after changing some code without restarting the server is really important, and will make the development process a lot easier.
 - git
   * I want to keep a track of what I'm doing! Heroku also has very nice integration with this.
+- [jscolor](http://www.jscolor.com/)
+  * Because the user has the option to customise their character, I wanted a user firendly way to select it. I chose jscolor, hosted on [cdnjs.com](www.cdnjs.com).
 
 ## The Blog
 Like anyone who uses atom and has a fancy .io domain, I'm going to blog my experiences with competing in the Lilly hackathon. The engine I wrote is a little basic, but it's available [here](https://hjf.io/blog/blog.php).
 
 
-## Notes
+## Notes, what I've learnt
 
 - Use ```heroku config --app lilly-hack-hjf``` to find the DB URL
   * This should be left in a file called ```.env```, with DATABASE_URL="$response" as a line in the file.
 - Don't use ```npm start``` to start the server, use ```heroku local```
 - To view the page in action, it's hosted on [heroku](http://lilly-hack-hjf.herokuapp.com)
+- Local storage is a great *kind of* IPC for different js scripts, but not really IPC.
+  * It lets me move the user info between pages. (really should start hashing the passwords at this point)
+  * I can access the username via ```localStorage[userid]``` as defined in main.js

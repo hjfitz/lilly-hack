@@ -149,12 +149,31 @@ function changeMan() {
   drawArms(ctx,teeCol);
   //draw shoes
   drawShoes(shoeCol);
-  pushDB(hairCol,eyeCol,skincol,teeCol,trouserCol,shoeCol);
+  pushDB(hairCol,eyeCol,skinCol,teeCol,trouserCol,shoeCol);
 }
 
 function pushDB(hair,eye,skin,tee,trou,shoe) {
   //post request to push to db and we're sorted for this one!
   //TODO: need to pull user preferences from database on page load. should edit /router/index.js
+  //for (var i in localStorage) {
+    //console.log(i);
+    //console.log(localStorage[i]);
+  //}
+  console.log(localStorage.userid);
+  $.post('/create/update',
+    {
+      userId: localStorage.userid,
+      hairCol: hair,
+      eyeCol: eye,
+      skinCol: skin,
+      teeCol: tee,
+      trouCol: trou,
+      shoeCol, shoe
+    },
+    function(data) {
+      console.log(data);
+    });
+
 }
 
 
