@@ -39,7 +39,7 @@ router.post('/create/login',
     pg.connect(process.env.DATABASE_URL, function(err, client) {
       if (err) throw err;
         client
-          .query('select * from USERS where user_name = $1 and user_pass = $2',[req.body.uName, req.body.uPass])
+          .query('select * from USERS where user_name = \''+ req.body.uName+'\' and user_pass = \''+ req.body.uPass + '\';')
           .on('row', function(row) {
        results.push(row);
        res.send(results);
@@ -51,7 +51,7 @@ router.post('/create/login',
      } else {
        resp = "error";
      }
-     res.send(results);
+     //res.send(results);
    }
   );
 });
