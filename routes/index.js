@@ -33,7 +33,23 @@ router.get('/create',
 });
 
 
-
+router.post('/insert', function(req, res) {
+  //connect to database
+  var dateCreated = new Date();
+  var day = dateCreated.getDate();
+  var month = dateCreated.getMonth();
+  var year = dateCreated.getFullYear();
+  var dateInsert = year + "-" + month + "-" + day;
+  pg.connect(process.env.DATABASE_URL, function(err, client) {
+     if (err) throw err;
+     client
+        //insert data using prepared statement
+       .query('INSERT INTO USERS (user_name, user_pass, user_created, user_health, user_exp) VALUES ($1, $2, $3, 1000, 0)', [req.body.uName, req.body.uPass, dateInsert])
+       .on('end', function(){
+         res.send('success');
+       });
+   });
+});
 
 
 

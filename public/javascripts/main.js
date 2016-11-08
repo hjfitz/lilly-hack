@@ -23,7 +23,22 @@ function createAcct() {
 }
 
 function submit() {
+  var isCreate;
+  if (subBtn.textContent == "Login") {
+    isCreate = true;
+  } else {
+    isCreate = false; //not really necessary as an empty var == false
+  }
   userName = document.getElementById("user_name").value;
   userPass = document.getElementById("pass").value;
   console.log(userName);
+  $.post('/insert',
+    {
+      uName: userName,
+      uPass: userPass,
+      type:  isCreate
+    },
+    function(){
+      location.reload(true);  //reload the page from server (not cache)
+    });
 }
