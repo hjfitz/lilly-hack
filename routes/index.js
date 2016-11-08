@@ -17,7 +17,11 @@ pg.connect(process.env.DATABASE_URL, function(err, client) {
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
-  res.render('index', { title: 'Express' });
+  res.render('index', { title: 'todomatronpickabettername' });
+});
+
+router.get('/login', function(req,res,next) {
+  res.render('login', {title: 'Login Page'});
 });
 
 router.get('/create',
