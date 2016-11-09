@@ -119,10 +119,15 @@ var
 //trouinput.addEventListener('input', changeTrou);
 //shoeinput.addEventListener('input', changeShoe);
 
-var changeBtn = document.getElementById("btnChange");
-changeBtn.addEventListener("click", changeMan);
+var
+  changeBtn = document.getElementById("btnChange"),
+  checkBtn = document.getElementById("btnCheck")
+;
 
-function changeMan() {
+changeBtn.addEventListener("click", changeMan);
+//checkBtn.addEventListener("click", changeMan);
+
+function changeMan(e) {
   console.log("change invoked");
   //ctx.clearRect(0, 0, canvas.width, canvas.height);
   hairCol = "#" + document.getElementById("hair_color").value;

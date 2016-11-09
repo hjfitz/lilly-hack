@@ -98,6 +98,14 @@ router.post('/create/update', function (req,res) {
             });
         } else {
             //something here about updating
+            var qry = "update PREFERENCES set skincol = '" + req.body.skinCol + "',   haircol = '" + req.body.hairCol + "',   teecol = '" + req.body.teeCol + "',   trousercol = '" + req.body.trouCol + "',   eyecol = '" + req.body.eyeCol + "', shoecol= '" + req.body.shoeCol + "' where user_id = " + req.body.userId + ";";
+            console.log(qry);
+          client
+            .query(qry)
+            .on('end', function() {
+              res.send("success updating!");
+              console.log("successfully updated preferences");
+            });
         }
       //console.log("oioioioioioio");
       //console.log(results);

@@ -41,3 +41,5 @@ Like anyone who uses atom and has a fancy .io domain, I'm going to blog my exper
 - Local storage is a great *kind of* IPC for different js scripts, but not really IPC.
   * It lets me move the user info between pages. (really should start hashing the passwords at this point)
   * I can access the username via ```localStorage[userid]``` as defined in main.js
+- I forgot how to update a table in SQL!
+  * ```update PREFERENCES set foo=bar, barfoo=foobar where user_id = 1;```
