@@ -23,7 +23,8 @@ router.get('/', function(req, res, next) {
 router.get('/login', function(req,res,next) {
   res.render('login', {title: 'Login Page'});
 });
-
+// code goes here to load the user info, gets stored in localStorage
+//on page load, canvas.js should check those vars before assigning default ones
 router.get('/create',
   function(req,res,next) {
     res.render('create',
@@ -88,16 +89,32 @@ router.post('/create/update', function (req,res) {
       //res.send(row.length);
       results = row;
         console.log("starts to invoke ");
-        client
-        .query('INSERT INTO PREFERENCES (user_id, skinCol, hairCol, teeCol, trouserCol, eyeCol, shoeCol) VALUES (\''+req.body.userId+'\', \''+req.body.skinCol+'\', \''+req.body.hairCol+'\', \''+req.body.teeCol+'\', \''+req.body.trouCol+'\', \''+req.body.eyeCol+'\', \''+req.body.shoeCol+'\')')
-        .on('end', function() {
-          res.send('success inserting!');
-          console.log("inserted");
-        });
+        if (results.rowCount == 0) {
+          client
+            .query('INSERT INTO PREFERENCES (user_id, skinCol, hairCol, teeCol, trouserCol, eyeCol, shoeCol) VALUES (\''+req.body.userId+'\', \''+req.body.skinCol+'\', \''+req.body.hairCol+'\', \''+req.body.teeCol+'\', \''+req.body.trouCol+'\', \''+req.body.eyeCol+'\', \''+req.body.shoeCol+'\')')
+            .on('end', function() {
+              res.send('success inserting!');
+              console.log("inserted");
+            });
+        } else {
+            //something here about updating
+        }
       //console.log("oioioioioioio");
       //console.log(results);
     });
     console.log("can insert");
+  });
+});
+
+router.post('/create/getinfo', function(req,res) {
+  var results;
+  pg.connect(process.env.DATABASE_URL, function(err, client) {
+    if (err) throw err;
+    client
+    .query("SELECT * FROM PREFERENCES WHERE user_id = '" + req.body.userId + "';")
+    .on('row', function(row) {
+      res.send(row);
+    });
   });
 });
 

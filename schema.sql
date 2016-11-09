@@ -19,12 +19,12 @@ CREATE TABLE USERS (
 CREATE TABLE PREFERENCES (
   pref_id    SERIAL     NOT NULL PRIMARY KEY,
   user_id    INT     NOT NULL REFERENCES USERS(user_id),
-  skinCol    CHAR(6) NOT NULL,
-  hairCol    CHAR(6) NOT NULL,
-  teeCol     CHAR(6) NOT NULL,
-  trouserCol CHAR(6) NOT NULL,
-  eyeCol     CHAR(6) NOT NULL,
-  shoeCol    CHAR(6) NOT NULL
+  skinCol    CHAR(7) NOT NULL,
+  hairCol    CHAR(7) NOT NULL,
+  teeCol     CHAR(7) NOT NULL,
+  trouserCol CHAR(7) NOT NULL,
+  eyeCol     CHAR(7) NOT NULL,
+  shoeCol    CHAR(7) NOT NULL
 );
 
 -- one user has many todos

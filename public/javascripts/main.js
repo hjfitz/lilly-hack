@@ -64,7 +64,7 @@ function submit() {
           localStorage.setItem("userid", userid);
           localStorage.setItem("userExp", exp);
           localStorage.setItem("userHealth", health);
-        //window.location = "/create";
+        window.location = "/create";
         }
       });
   } else {

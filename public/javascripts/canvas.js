@@ -81,28 +81,25 @@ function drawArms(ctx,col) {
 
 //use material design colours to make the person look like they fit!
 //https://material.google.com/style/color.html#color-color-palette
-var
-  skinCol    = "#FFCDD2",
-  hairCol    = "#8D6E63",
-  teeCol     = "#B3E5FC",
-  trouserCol = "#616161",
-  eyeCol     = "#8D6E63",
-  shoeCol    = "#212121"
-;
-//we begin with the hair
-drawRect(120,60,60,40, hairCol);
-//give the person a face and a neck
-drawSkin(skinCol);
-//they can't see!
-drawEyes(eyeCol);
-//draw body
-drawRect(110,135,80,130,teeCol);
-//draw trousers
-drawTrousers(trouserCol);
-//draw arms
-drawArms(ctx,teeCol);
-//draw shoes
-drawShoes(shoeCol);
+
+//define the vars first as a failsafe. then pulll from the database and change
+
+function drawMan(hairCol,skinCol,eyeCol,teeCol,trouserCol,shoeCol) {
+  //we begin with the hair
+  drawRect(120,60,60,40, hairCol);
+  //give the person a face and a neck
+  drawSkin(skinCol);
+  //they can't see!
+  drawEyes(eyeCol);
+  //draw body
+  drawRect(110,135,80,130,teeCol);
+  //draw trousers
+  drawTrousers(trouserCol);
+  //draw arms
+  drawArms(ctx,teeCol);
+  //draw shoes
+  drawShoes(shoeCol);
+}
 
 var
   hairinput = document.getElementById("hair_color"),
@@ -113,16 +110,14 @@ var
   shoeinput = document.getElementById("shoe_color")
 ;
 
-$(hairinput).on('input',null,null,changeHair);
+//$(hairinput).on('input',null,null,changeHair);
 
 //hairinput.addEventListener('oninput', changeHair);
-eyeinput.addEventListener('input',  changeEye);
-skinput.addEventListener('input',   changeSkin);
-teeinput.addEventListener('input',  changeTee);
-trouinput.addEventListener('input', changeTrou);
-shoeinput.addEventListener('input', changeShoe);
-console.log('oi');
-changeHair();
+//eyeinput.addEventListener('input',  changeEye);
+//skinput.addEventListener('input',   changeSkin);
+//teeinput.addEventListener('input',  changeTee);
+//trouinput.addEventListener('input', changeTrou);
+//shoeinput.addEventListener('input', changeShoe);
 
 var changeBtn = document.getElementById("btnChange");
 changeBtn.addEventListener("click", changeMan);
@@ -168,7 +163,7 @@ function pushDB(hair,eye,skin,tee,trou,shoe) {
       skinCol: skin,
       teeCol: tee,
       trouCol: trou,
-      shoeCol, shoe
+      shoeCol: shoe
     },
     function(data) {
       console.log(data);
@@ -176,28 +171,33 @@ function pushDB(hair,eye,skin,tee,trou,shoe) {
 
 }
 
-
-function changeHair() {
- console.log("hair invoked");
-
-}
-
-function changeEye() {
-
-}
-
-function changeSkin() {
-
-}
-
-function changeTee() {
-
-}
-
-function changeTrou() {
-
-}
-
-function changeShoe() {
-
-}
+$(document).ready(function() {
+  var
+    skinCol    = "#FFCDD2",
+    hairCol    = "#8D6E63",
+    teeCol     = "#B3E5FC",
+    trouserCol = "#616161",
+    eyeCol     = "#8D6E63",
+    shoeCol    = "#212121"
+  ;
+  if (localStorage.userid) {
+    $.post('/create/getinfo',
+      {
+        userId: localStorage.userid
+      },
+    function(data) {
+      if (data) {
+        console.log(data);
+        skinCol    = data.skincol;
+        hairCol    = data.haircol
+        teeCol     = data.teecol;
+        trouserCol = data.trousercol;
+        eyeCol     = data.eyecol;
+        shoeCol    = data.shoecol;
+        drawMan(hairCol,skinCol,eyeCol,teeCol,trouserCol,shoeCol);
+      } else {
+        drawMan(hairCol,skinCol,eyeCol,teeCol,trouserCol,shoeCol);
+      }
+    });
+  }
+});
