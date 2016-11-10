@@ -49,6 +49,39 @@ router.post('/todo/add/new',
   });
 });
 
+router.post('/todo/del',
+  function(req,res,next) {
+    pg.connect(process.env.DATABASE_URL, function(err, client) {
+      if (err) throw err;
+      var qry = squel.delete()
+                      .from("TODO")
+                      .where("todo_id = " + req.body.todoId)
+                      .toString() + ";";
+      client.query(qry)
+             .on('end', function() {
+               res.send("success");
+             });
+    });
+  });
+
+router.post('/create/updateAtrs',
+  function(req,res,next) {
+    pg.connect(process.env.DATABASE_URL, function(err, client) {
+      if (err) throw err;
+      var qry = squel.update()
+                     .table("USERS")
+                     .set("user_health", req.body.health)
+                     .set("user_exp", req.body.exp)
+                     .where("user_id = " + req.body.userid)
+                     .toString() + ';';
+      console.log("\n\n" + qry + "\n\n");
+      client.query(qry)
+            .on('end', function() {
+              res.send("success");
+            });
+    });
+  });
+
 router.get('/login', function(req,res,next) {
   res.render('login', {title: 'Login Page'});
 });

@@ -40,3 +40,8 @@ input {
 .todo-card {
   width: 600px;
 }
+
+.tickoff {
+  float:right!important;
+  margin-top:10px;
+}

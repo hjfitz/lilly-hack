@@ -15,6 +15,7 @@ function submit() {
     function(data) {
       console.log(data);
     });
+    location.reload(true);
   } else {
     console.log("error");
   }
