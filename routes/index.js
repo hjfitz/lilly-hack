@@ -142,14 +142,10 @@ router.post('/todo/gettodo', function(request, response) {
     .query("select * from TODO where user_id = '" + request.body.userId + "';")
     .on('row', function(row, result) {
       results.push(row);
-      //console.log(results);
     })
     .on('end', function(result) {
-      //console.log(result)
       response.send(results);
-      //console.log(results);
     });
-    //response.send(results);
   });
 
 });

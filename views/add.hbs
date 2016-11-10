@@ -5,14 +5,32 @@
 <div class="row">
     <form class="col s12">
       <div class="row">
-        <div class="input-field col s6">
-          <input placeholder="Placeholder" id="first_name" type="text" class="validate">
-          <label for="first_name">First Name</label>
+        <div class="input-field col s3">
+          <i class="material-icons prefix">A</i>
+          <input id="task-title" type="text" class="validate">
+          <label for="task-title">To-do name</label>
         </div>
-        <div class="input-field col s6">
-          <input id="last_name" type="text" class="validate">
-          <label for="last_name">Last Name</label>
+        <div class="input-field col s3">
+          <i class="material-icons prefix">grade</i>
+          <input id="todo-experience" type="text" class="validate">
+          <label for="todo-experience">Exp gained</label>
+        </div>
+        <div class="input-field col s3">
+          <i class="material-icons prefix">favorite</i>
+          <input id="todo-health" type=text class=validate>
+          <label for="todo-health">Health gained</label>
+        </div>
+      </div>
+      <div class="row">
+        <div class="input-field col s12">
+          <i class="material-icons prefix">subject</i>
+          <textarea id="todo-text" class="materialize-textarea"></textarea>
+          <label for="todo-text">To-do description</label>
         </div>
       </div>
     </form>
-  </div>
+</div>
+<div class="row center">
+  <a class="waves-effect waves-light btn light-green" id="btn-add"><i class="material-icons right">done</i>Add</a>
+</div>
+<script src="/javascripts/add.js"></script>
