@@ -1,0 +1,57 @@
+<h1>{{title}}</h1>
+
+<div class="row" id="main-todo">
+  <div class="col s12 m6">
+    <div class="card blue-grey lighten-2 todo-card">
+      <div class="card-content white-text">
+        <span class="card-title">Main todo</span>
+          <ul class="collapsible blue-grey-text" data-collapsible="accordion" id="todo-list">
+          </ul>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="row" id="default-todo">
+  <div class="col s12 m6">
+    <div class="card blue-grey todo-card">
+      <div class="card-content white-text">
+        <span class="card-title">I'm your default todo list!</span>
+          <ul class="collapsible blue-grey-text" data-collapsible="accordion">
+            <li>
+              <div class="collapsible-header">I'm a todo, click me to see your todo detail!</div>
+              <div class="collapsible-body white">
+                <p>Here is the task you want to be completed. Their accompanying experience and health change are below</p>
+                <p class="exp">Exp: +10</p>
+                <p class="health"> Health: +5</p>
+              </div>
+            </li>
+            <li>
+              <div class="collapsible-header">Todos can also be detremental! Click me to see.</div>
+              <div class="collapsible-body white">
+                <p>The task coule be anything, for example, I'm about eating a whole dominoes to yourseld</p>
+                <p class=exp>Exp: +- 0</p>
+                <p class="health">Health: -10</p>
+              </div>
+            </li>
+            <li>
+              <div class="collapsible-header">Why don't you complete this todo by going and creating your own?</div>
+              <div class="collapsible-body white">
+                <p>Go to <a href=/todo/add>to add more todos!</p>
+              </div>
+            </li>
+    </ul>
+    </div>
+      <div class="card-action">
+        <a href="#" id="hide-default" class="orange-text text-accent-2"><i class="material-icons right">close</i>I understand, hide me</a>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+
+
+
+  <script src="/javascripts/todo.js"></script>

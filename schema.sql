@@ -29,10 +29,12 @@ CREATE TABLE PREFERENCES (
 
 -- one user has many todos
 CREATE TABLE TODO (
-  todo_id    SERIAL NOT NULL PRIMARY KEY,
-  user_id    INT NOT NULL REFERENCES USERS(user_id),
-  todo_title VARCHAR(30) NOT NULL,
-  todo_text  VARCHAR(255)
+  todo_id         SERIAL        NOT NULL PRIMARY KEY,
+  user_id         INT           NOT NULL REFERENCES USERS(user_id),
+  todo_title      VARCHAR(30)   NOT NULL,
+  todo_text       VARCHAR(255)  NOT NULL,
+  todo_healthgain INT           NOT NULL,
+  todo_expgain    INT           NOT NULL
 );
 
 -- general insert should be structured as follows in the db.js file (yet to be created)

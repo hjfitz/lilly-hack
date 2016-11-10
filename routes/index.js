@@ -20,6 +20,14 @@ router.get('/', function(req, res, next) {
   res.render('index', { title: 'todomatronpickabettername' });
 });
 
+router.get('/todo', function(request, response, next) {
+  response.render('todo', { title: 'Todo List '});
+});
+
+router.get('/todo/add', function(request, response, next) {
+  response.render('add', {title: 'Add a To-do'});
+});
+
 router.get('/login', function(req,res,next) {
   res.render('login', {title: 'Login Page'});
 });
@@ -126,6 +134,25 @@ router.post('/create/getinfo', function(req,res) {
   });
 });
 
+router.post('/todo/gettodo', function(request, response) {
+  var results = [];
+  pg.connect(process.env.DATABASE_URL, function(err, client) {
+    if (err) throw err;
+    client
+    .query("select * from TODO where user_id = '" + request.body.userId + "';")
+    .on('row', function(row, result) {
+      results.push(row);
+      //console.log(results);
+    })
+    .on('end', function(result) {
+      //console.log(result)
+      response.send(results);
+      //console.log(results);
+    });
+    //response.send(results);
+  });
+
+});
 
 
 module.exports = router;
