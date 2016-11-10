@@ -1,9 +1,17 @@
-# Lily Hack
+# Lilly Hack
 
-## The Idea
-Todo list based game where completing todos gains experience and mana. Scoreboard with highest todoers. Possible unlocks from gaining exp.
+## The Idea and Inspiration
+I'm ashamed that I've only just put this on the document. The inspiration for this web "game" is comes from the health challenge. More specifically, Use Case 2 - trying to help maintain better diet and exercise.
 
-Todos are based around ideas from 'The Health Challenge'
+Here's where my idea comes in to play. I want to create a to-do list that rewards the user, and allows the user to compete with other users - competing to be healthy. The idea is simple, the user creates their to-dos and assigns them certain health and experience bonuses or penalties. With the completion of a to-do, they are rewarded or punished.
+
+The aim of the game is to create a miniature version of you, and get the highest level and experience on the leaderboard!
+
+Eventually, I'd like to develop this over more time and create a rewards system, where experience can be used to buy visual upgrades for their character.
+
+Notes:
+- Experience and health are limited to 100 per task. It's still easy to add a lot of experience to your character and get to the top of the leaderboard... But where's the fun in that?
+- levels are calculated as a f(n) = 100n<sup>2</sup> where n is the level required.
 
 ## The Codebase
 After attending the conference, I learnt about a number of technologies that would be very applicable to this idea of mine. There are also some things of my own that I'm taking with me.
