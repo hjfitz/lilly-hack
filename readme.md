@@ -27,6 +27,7 @@ After attending the conference, I learnt about a number of technologies that wou
   * I want to keep a track of what I'm doing! Heroku also has very nice integration with this.
 - [jscolor](http://www.jscolor.com/)
   * Because the user has the option to customise their character, I wanted a user firendly way to select it. I chose jscolor, hosted on [cdnjs.com](www.cdnjs.com).
+- Query. I was pretty worried about concatenating variables to make a query for the database. Query solves this by letting you set them up with a Query object. It also makes the code SO MUCH more readable.
 
 ## The Blog
 Like anyone who uses atom and has a fancy .io domain, I'm going to blog my experiences with competing in the Lilly hackathon. The engine I wrote is a little basic, but it's available [here](https://hjf.io/blog/blog.php).

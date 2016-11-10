@@ -1,17 +1,18 @@
 var express = require('express');
 var router = express.Router();
-
+var squel = require('squel');
 var pg = require('pg');
+
 
 pg.defaults.ssl = true;
 pg.connect(process.env.DATABASE_URL, function(err, client) {
   if (err) throw err;
-  console.log('Connected to postgres! Getting schemas...');
+  //console.log('Connected to postgres! Getting schemas...');
 
   client
     .query('SELECT * FROM USERS;')
     .on('row', function(row) {
-      console.log(JSON.stringify(row));
+      //console.log(JSON.stringify(row));
     });
 });
 
@@ -26,6 +27,26 @@ router.get('/todo', function(request, response, next) {
 
 router.get('/todo/add', function(request, response, next) {
   response.render('add', {title: 'Add a To-do'});
+});
+
+router.post('/todo/add/new',
+  function(req, response, next) {
+    var results = [];
+    pg.connect(process.env.DATABASE_URL, function(err, client) {
+      if (err) throw err;
+      var qry = squel.insert()
+                     .into("TODO")
+                     .set("user_id", req.body.userId)
+                     .set("todo_title", req.body.titl)
+                     .set("todo_text", req.body.cont)
+                     .set("todo_healthgain", req.body.health)
+                     .set("todo_expgain", req.body.exp)
+                     .toString() + ";";
+      client.query(qry)
+            .on('end', function() {
+              response.send("successfully inserted!");
+            });
+  });
 });
 
 router.get('/login', function(req,res,next) {

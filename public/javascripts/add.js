@@ -3,14 +3,14 @@ btnAdd.addEventListener("click", submit);
 
 function submit() {
   var canSubmit = validate();
-  if (canSubmit && localStorage.userId) {
+  if (canSubmit && localStorage.userid) {
     $.post('/todo/add/new',
       {
-        userId: localStorage.userId,
+        userId: localStorage.userid,
         titl: canSubmit.titl,
         health: canSubmit.health,
         exp: canSubmit.exp,
-        content: canSubmit.cont
+        cont: canSubmit.cont
       },
     function(data) {
       console.log(data);
