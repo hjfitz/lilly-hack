@@ -169,9 +169,6 @@ function pushDB(hair,eye,skin,tee,trou,shoe) {
       teeCol: tee,
       trouCol: trou,
       shoeCol: shoe
-    },
-    function(data) {
-      console.log(data);
     });
 
 }

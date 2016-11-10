@@ -42,10 +42,9 @@ router.post('/todo/add/new',
                      .set("todo_healthgain", req.body.health)
                      .set("todo_expgain", req.body.exp)
                      .toString() + ";";
-      client.query(qry)
-            .on('end', function() {
-              response.send("successfully inserted!");
-            });
+      client.query(qry).on('end', function() {
+        response.send("successfully inserted!");
+      });
   });
 });
 
@@ -57,12 +56,12 @@ router.post('/todo/del',
                       .from("TODO")
                       .where("todo_id = " + req.body.todoId)
                       .toString() + ";";
-      client.query(qry)
-             .on('end', function() {
-               res.send("success");
-             });
+      client.query(qry).on('end', function() {
+        res.send("success");
+      });
     });
-  });
+  }
+);
 
 router.post('/create/updateAtrs',
   function(req,res,next) {
@@ -75,12 +74,12 @@ router.post('/create/updateAtrs',
                      .where("user_id = " + req.body.userid)
                      .toString() + ';';
       console.log("\n\n" + qry + "\n\n");
-      client.query(qry)
-            .on('end', function() {
+      client.query(qry).on('end', function() {
               res.send("success");
-            });
+      });
     });
-  });
+  }
+);
 
 router.get('/login', function(req,res,next) {
   res.render('login', {title: 'Login Page'});
@@ -101,88 +100,94 @@ router.post('/create/login',
     var resp;
     pg.connect(process.env.DATABASE_URL, function(err, client) {
       if (err) throw err;
-        client
-          .query('select * from USERS where user_name = \''+ req.body.uName+'\' and user_pass = \''+ req.body.uPass + '\';')
-          .on('row', function(row) {
-       results.push(row);
-       res.send(results);
-     })
-     if (results.length >= 1) {
-       resp = "logged in!";
-       //localStorage.setItem("logged in", true);
-       //localStorage.setItem("username", req.body.uName);
-     } else {
-       resp = "error";
-     }
-     //res.send(results);
-   }
-  );
+      var qry = squel.select()
+                     .from("USERS")
+                     .where("user_name = ''" + req.body.uName + "'")
+                     .where("user_pass = ''" + req.body.uPass + "'")
+                     .toString() + ";";
+      client.query(qry).on('row', function(row) {
+          results.push(row);
+        }).on('end', function() {
+          res.send(results);
+        });
+   });
 });
 
 
 router.post('/insert/create', function(req, res) {
-  //connect to database
-  //i bring you, the hacky method
-  if (req.body.type == "signup") {
-    var dateCreated = new Date();
-    var day = dateCreated.getDate();
-    var month = dateCreated.getMonth();
-    var year = dateCreated.getFullYear();
-    var dateInsert = year + "-" + month + "-" + day;
+    var
+      dateCreated = new Date()
+      day = dateCreated.getDate(),
+      month = dateCreated.getMonth(),
+      year = dateCreated.getFullYear(),
+      dateInsert = year + "-" + month + "-" + day
+    ;
     pg.connect(process.env.DATABASE_URL, function(err, client) {
       if (err) throw err;
+      var qry = squel.insert()
+                     .into("USERS")
+                     .set("user_name", req.body.uName)
+                     .set("user.pass", req.body.uPass)
+                     .set("user_created", dateInsert)
+                     .set("user_health", 1000)
+                     .set("user_exp", 0)
+                     .toString() + ";";
       client
-        //insert data using prepared statement
-       .query('INSERT INTO USERS (user_name, user_pass, user_created, user_health, user_exp) VALUES ($1, $2, $3, 1000, 0)', [req.body.uName, req.body.uPass, dateInsert])
-       .on('end', function(){
+       .query(qry).on('end', function(){
          res.send('success');
        });
    });
- }
 });
 
 router.post('/create/update', function (req,res) {
   var results;
+  var qry = squel.select()
+                 .from("PREFERENCES")
+                 .where("user_id = " + req.body.userId).toString() + ";";
+
+  var insQuery = squel.insert()
+                      .into("PREFERENCES")
+                      .set("user_id", req.body.userId)
+                      .set("skincol", req.body.skinCol)
+                      .set("haircol", req.body.haircol)
+                      .set("teecol", req.body.teeCol)
+                      .set("trousercol", req.body.trouCol)
+                      .set("eyecol", req.body.eyeCol)
+                      .set("shoecol", req.body.shoecol)
+                      .toString() + ";"
+
+  var updQuery = squel.update()
+                      .table("PREFERENCES")
+                      .set("user_id", req.body.userId)
+                      .set("skincol", req.body.skinCol)
+                      .set("haircol", req.body.haircol)
+                      .set("teecol", req.body.teeCol)
+                      .set("trousercol", req.body.trouCol)
+                      .set("eyecol", req.body.eyeCol)
+                      .set("shoecol", req.body.shoecol)
+                      .toString() + ";"
+
   pg.connect(process.env.DATABASE_URL, function(err, client) {
     if (err) throw err;
-    client
-    .query('SELECT * FROM PREFERENCES WHERE user_id = \''+req.body.userId+'\'')
-    .on('end', function(row) {
-      //res.send(row.length);
+    client.query(qry).on('end', function(row) {
       results = row;
-        console.log("starts to invoke ");
-        if (results.rowCount == 0) {
-          client
-            .query('INSERT INTO PREFERENCES (user_id, skinCol, hairCol, teeCol, trouserCol, eyeCol, shoeCol) VALUES (\''+req.body.userId+'\', \''+req.body.skinCol+'\', \''+req.body.hairCol+'\', \''+req.body.teeCol+'\', \''+req.body.trouCol+'\', \''+req.body.eyeCol+'\', \''+req.body.shoeCol+'\')')
-            .on('end', function() {
-              res.send('success inserting!');
-              console.log("inserted");
-            });
-        } else {
-            //something here about updating
-            var qry = "update PREFERENCES set skincol = '" + req.body.skinCol + "',   haircol = '" + req.body.hairCol + "',   teecol = '" + req.body.teeCol + "',   trousercol = '" + req.body.trouCol + "',   eyecol = '" + req.body.eyeCol + "', shoecol= '" + req.body.shoeCol + "' where user_id = " + req.body.userId + ";";
-            console.log(qry);
-          client
-            .query(qry)
-            .on('end', function() {
-              res.send("success updating!");
-              console.log("successfully updated preferences");
-            });
-        }
-      //console.log("oioioioioioio");
-      //console.log(results);
+      if (results.rowCount == 0) {
+        client.query(insQuery);
+      } else {
+        client.query(updQuery);
+      }
     });
-    console.log("can insert");
   });
 });
 
 router.post('/create/getinfo', function(req,res) {
-  var results;
+  var qry = squel.select()
+                 .from("PREFERENCES")
+                 .where("user_id = " + req.body.userId)
+                 .toString() + ";";
   pg.connect(process.env.DATABASE_URL, function(err, client) {
     if (err) throw err;
-    client
-    .query("SELECT * FROM PREFERENCES WHERE user_id = '" + req.body.userId + "';")
-    .on('row', function(row) {
+    client.query(qry).on('row', function(row) {
       res.send(row);
     });
   });
@@ -190,18 +195,18 @@ router.post('/create/getinfo', function(req,res) {
 
 router.post('/todo/gettodo', function(request, response) {
   var results = [];
+  var qry = squel.select()
+                 .from("TODO")
+                 .where("user_id = " + request.body.userId)
+                 .toString() + ";";
   pg.connect(process.env.DATABASE_URL, function(err, client) {
     if (err) throw err;
-    client
-    .query("select * from TODO where user_id = '" + request.body.userId + "';")
-    .on('row', function(row, result) {
+    client.query(qry).on('row', function(row, result) {
       results.push(row);
-    })
-    .on('end', function(result) {
+    }).on('end', function(result) {
       response.send(results);
     });
   });
-
 });
 
 
