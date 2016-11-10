@@ -191,7 +191,7 @@ $(document).ready(function() {
         userId: localStorage.userid
       },
     function(data) {
-      if (data) {
+//      if (data) {
         console.log(data);
         skinCol    = data.skincol;
         hairCol    = data.haircol
@@ -200,9 +200,9 @@ $(document).ready(function() {
         eyeCol     = data.eyecol;
         shoeCol    = data.shoecol;
         drawMan(hairCol,skinCol,eyeCol,teeCol,trouserCol,shoeCol);
-      } else {
-        drawMan(hairCol,skinCol,eyeCol,teeCol,trouserCol,shoeCol);
-      }
+//      } else {
+//        drawMan(hairCol,skinCol,eyeCol,teeCol,trouserCol,shoeCol);
+//      }
     });
   }
 });

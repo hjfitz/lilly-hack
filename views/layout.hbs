@@ -14,19 +14,38 @@
     <!-- import the mighty jquery -->
     <!-- Auth0 lock script -->
     <script src="https://cdn.auth0.com/js/lock/10.5/lock.min.js"></script>
+    <script> $(document).ready(function() {$(".button-collapse").sideNav();});</script>
     <!-- Setup the viewport -->
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
   </head>
   <body>
     <nav>
-      <div class="nav-wrapper red darken-2">
-        <a href=# class="brand-logo center">Lilly Hack</a>
-        <ul id=nav-mobile class=right hide-on-med-and-down>
-          <li><a href="test">thing a</a></li>
-          <li><a href="#">thing b</a></li>
+      <div class="nav-wrapper red darken-3">
+        <a href="#!" class="brand-logo center ">The Health Challenge</a>
+        <a href="#" data-activates="mobile-demo" class="button-collapse"><i class="material-icons">menu</i></a>
+        <ul class="right hide-on-med-and-down">
+          <li><a href="/">Home</a></li>
+          <li><a href="/create">Create</a></li>
+          <li><a href="/leaderboard">Leaderboard</a></li>
+          <!-- Dropdown Trigger -->
+          <li><a class="dropdown-button" href="#!" data-activates="dropdown1">Todos<i class="material-icons right">arrow_drop_down</i></a></li>
+        </ul>
+
+        <ul class="side-nav" id="mobile-demo">
+          <li><a href="/">Home</a></li>
+          <li><a href="/create">Create/Edit Character</a></li>
+          <li><a href="/todo">View To-Dos</a></li>
+          <li><a href="/todo/add">Add To-Do</a></li>
+          <li><a href="/leaderboard">Leaderboard</a></li>
         </ul>
       </div>
     </nav>
+
+      <ul id="dropdown1" class="dropdown-content">
+        <li><a href="/todo">View Todos</a></li>
+        <li class="divider"></li>
+        <li><a href="/todo/add">Add Todo</a></li>
+      </ul>
     <main class="container">
       <div class="card z-depth-2">
         {{{body}}}

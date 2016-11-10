@@ -4,6 +4,7 @@ hideBtn.addEventListener("click", hideDefault);
 function hideDefault() {
   var hiddenCard = document.getElementById("default-todo");
   hiddenCard.classList.toggle('hidden');
+  localStorage.setItem("defaultTodoHidden", true);
   //save to local storage. remember to create a global function to log out and clear LS.
   //can therefore utilise a document.ready to hide on default if the user has set and logged in
 }
@@ -72,7 +73,10 @@ function getTodo(id) {
       userId: id
     },
     function(data) {
-      if (data) {
+      console.log(data);
+      if (data.length != 0) {
+        var mainCard = document.getElementById("main-todo");
+        mainCard.classList = "row";
         console.log(data);
         for (var i = 0; i<data.length;i++) {
           var
@@ -156,6 +160,10 @@ $(document).ready(function() {
   if (localStorage.userid) {
     getTodo(localStorage.userid);
     // go on to add event listener to ALL of the check boxes
+  }
+  if (localStorage.defaultTodoHidden) {
+    var hideMe = document.getElementById("default-todo");
+    hideMe.classList = "hidden";
   }
 
 });

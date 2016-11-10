@@ -22,7 +22,7 @@ router.get('/', function(req, res, next) {
 });
 
 router.get('/todo', function(request, response, next) {
-  response.render('todo', { title: 'Todo List '});
+  response.render('todo', { title: 'Your To-Dos'});
 });
 
 router.get('/todo/add', function(request, response, next) {

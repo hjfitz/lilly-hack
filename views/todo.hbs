@@ -1,7 +1,7 @@
 <h1>{{title}}</h1>
 
-<div class="row" id="main-todo">
-  <div class="col s12 m6">
+<div class="row hidden" id="main-todo">
+  <div class="col s12 m8 offset-m2">
     <div class="card blue-grey lighten-2 todo-card">
       <div class="card-content white-text">
         <span class="card-title">Main todo</span>
@@ -13,7 +13,7 @@
 </div>
 
 <div class="row" id="default-todo">
-  <div class="col s12 m6">
+  <div class="col s12 m8 offset-m2">
     <div class="card blue-grey todo-card">
       <div class="card-content white-text">
 
@@ -50,6 +50,16 @@
       </div>
     </div>
   </div>
+</div>
+
+<div class="fixed-action-btn toolbar">
+  <a class="btn-floating btn-large red">
+    <i class="large material-icons">settings</i>
+  </a>
+  <ul>
+    <li class="waves-effect waves-light"><a href="/"><i class="material-icons">supervisor_account</i>Login</a></li>
+    <li class="waves-effect waves-light"><a href="#!"><i class="material-icons">lock_outline</i>Logout</a></li>
+  </ul>
 </div>
 
 

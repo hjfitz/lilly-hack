@@ -37,9 +37,6 @@ input {
   width:200px!important;
 }
 /* please be temporary */
-.todo-card {
-  width: 600px;
-}
 
 .tickoff {
   float:right!important;
