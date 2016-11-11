@@ -102,8 +102,8 @@ router.post('/create/login',
       if (err) throw err;
       var qry = squel.select()
                      .from("USERS")
-                     .where("user_name = ''" + req.body.uName + "'")
-                     .where("user_pass = ''" + req.body.uPass + "'")
+                     .where("user_name = '" + req.body.uName + "'")
+                     .where("user_pass = '" + req.body.uPass + "'")
                      .toString() + ";";
       client.query(qry).on('row', function(row) {
           results.push(row);
@@ -127,7 +127,7 @@ router.post('/insert/create', function(req, res) {
       var qry = squel.insert()
                      .into("USERS")
                      .set("user_name", req.body.uName)
-                     .set("user.pass", req.body.uPass)
+                     .set("user_pass", req.body.uPass)
                      .set("user_created", dateInsert)
                      .set("user_health", 1000)
                      .set("user_exp", 0)
@@ -149,24 +149,25 @@ router.post('/create/update', function (req,res) {
                       .into("PREFERENCES")
                       .set("user_id", req.body.userId)
                       .set("skincol", req.body.skinCol)
-                      .set("haircol", req.body.haircol)
+                      .set("haircol", req.body.hairCol)
                       .set("teecol", req.body.teeCol)
                       .set("trousercol", req.body.trouCol)
                       .set("eyecol", req.body.eyeCol)
-                      .set("shoecol", req.body.shoecol)
+                      .set("shoecol", req.body.shoeCol)
                       .toString() + ";"
 
   var updQuery = squel.update()
                       .table("PREFERENCES")
                       .set("user_id", req.body.userId)
                       .set("skincol", req.body.skinCol)
-                      .set("haircol", req.body.haircol)
+                      .set("haircol", req.body.hairCol)
                       .set("teecol", req.body.teeCol)
                       .set("trousercol", req.body.trouCol)
                       .set("eyecol", req.body.eyeCol)
-                      .set("shoecol", req.body.shoecol)
+                      .set("shoecol", req.body.shoeCol)
                       .toString() + ";"
-
+  console.log(insQuery);
+  console.log(updQuery);
   pg.connect(process.env.DATABASE_URL, function(err, client) {
     if (err) throw err;
     client.query(qry).on('end', function(row) {
