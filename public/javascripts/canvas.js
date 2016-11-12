@@ -188,8 +188,8 @@ $(document).ready(function() {
         userId: localStorage.userid
       },
     function(data) {
-      if (data) {
-        console.log(data[0]);
+      if (data.length > 0) {
+        console.log(data);
         data = data[0];
         skinCol    = data.skincol;
         hairCol    = data.haircol
@@ -200,6 +200,7 @@ $(document).ready(function() {
         console.log(data.shoecol);
         drawMan(hairCol,skinCol,eyeCol,teeCol,trouserCol,shoeCol);
       } else {
+        console.log("no preferences");
         drawMan(hairCol,skinCol,eyeCol,teeCol,trouserCol,shoeCol);
       }
     });
