@@ -5,15 +5,7 @@ var pg = require('pg');
 
 
 pg.defaults.ssl = true;
-//pg.connect(process.env.DATABASE_URL, function(err, client) {
-//  if (err) throw err;
-//  console.log('Connected to postgres! Getting schemas...');
-//  client.query('SELECT * FROM USERS;') .on('row', function(row) {
-      //console.log(JSON.stringify(row));
-//    });
-//});
 
-/* GET home page. */
 router.get('/', function(req, res, next) {
   res.render('index', { title: 'The Health Challenge' });
 });
@@ -31,6 +23,26 @@ router.get('/logout', function(request, response, next) {
 });
 
 router.get('/leaderboard', function(request, response, next) {
+  response.render('leaderboard', { title: 'leaderboard'});
+});
+
+router.post('/create/checkuser', function(request, response, next) {
+  var qry = squel.select()
+                 .from('USERS')
+                 .where("user_name = '" + request.body.uName + "'")
+                 .toString() + ";";
+  var results = [];
+  pg.connect(process.env.DATABASE_URL, function(err, client) {
+    if (err) throw err;
+    client.query(qry).on('row', function(data) {
+      results.push(data);
+    }).on('end', function() {
+      response.send(results);
+    });
+  });
+});
+
+router.post('/leaderboard/getleaders', function( request, response, next) {
   var qry = squel.select()
                  .from("USERS")
                  .field("user_id")
@@ -45,16 +57,11 @@ router.get('/leaderboard', function(request, response, next) {
     client.query(qry).on('row', function(data) {
       results.push(data);
     }).on('end', function() {
-      response.render('leaderboard',
-        {
-          title: 'leaderboard',
-          query: qry,
-          list: results
-        });
-    })
+      response.send(results);
+    });
   });
-
 });
+
 
 router.post('/todo/add/new',
   function(req, response, next) {
@@ -209,6 +216,7 @@ router.post('/create/update', function (req,res) {
 });
 
 router.post('/create/getinfo', function(req,res) {
+  var results = [];
   var qry = squel.select()
                  .from("PREFERENCES")
                  .where("user_id = " + req.body.userId)
@@ -216,7 +224,9 @@ router.post('/create/getinfo', function(req,res) {
   pg.connect(process.env.DATABASE_URL, function(err, client) {
     if (err) throw err;
     client.query(qry).on('row', function(row) {
-      res.send(row);
+      results.push(row);
+    }).on('end', function() {
+      res.send(results);
     });
   });
 });

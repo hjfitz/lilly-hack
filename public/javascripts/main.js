@@ -1,9 +1,9 @@
 var
-  yesBtn = document.getElementById("btnYes"),
-  noBtn = document.getElementById("btnNo"),
+  yesBtn  = document.getElementById("btnYes"),
+  noBtn   = document.getElementById("btnNo"),
   logForm = document.getElementById("loginForm"),
-  subBtn = document.getElementById("btnSub"),
-  errBtn = document.getElementById("errorHide"),
+  subBtn  = document.getElementById("btnSub"),
+  errBtn  = document.getElementById("errorHide"),
   userName,
   userPass
 ;
@@ -68,29 +68,38 @@ function submit() {
         }
       });
   } else {
-    isCreate = "signup"; //not really necessary as an empty var == false
-    $.post('/insert/create',
+    isCreate = "signup";
+    $.post('/create/checkuser',
       {
-        uName: userName,
-        uPass: userPass,
-        type:  isCreate
-      }, function(data){
-        //location.reload(true);  //reload the page from server (not cache)
-        console.log(data);
-        //window.errorBox.classList.toggle("hidden");
-        welcome(userName);
-      }
-    );
+        uName: userName
+      }, function(data) {
+        if (data.length == 0) {
+          $.post('/insert/create',
+            {
+              uName: userName,
+              uPass: userPass,
+              type:  isCreate
+            }, function(data){
+              //location.reload(true);  //reload the page from server (not cache)
+              console.log(data);
+              //window.errorBox.classList.toggle("hidden");
+              dispCard("Welcome!", "Welcome, " + userName, "Click login to continue to login!");
+            }
+          );
+        } else {
+          dispCard("Error!", "I'm sorry, that username's taken", "Try picking another username");
+        }
+      });
   }
 }
 
-function welcome(user) {
-  if (window.errorbox.classList[1]) {
-    window.statCard.classList = "card blue-grey lighten-1";
-    window.errorbox.classList = "card";
-    window.statTitle.textContent = "Welcome!";
-    window.error.textContent = "Welcome, " + user;
-    window.errorDebug.textContent = "Click login to continue to login!";
+function dispCard(type, message, btnMessage) {
+  if (window.errorbox.classList[1]) { //if the box has the hidden class, we want to unhide it. there's an error otherwise!
+    window.statCard.classList     = "card blue-grey lighten-1";
+    window.errorbox.classList     = "card";
+    window.statTitle.textContent  = type;
+    window.error.textContent      = message;
+    window.errorDebug.textContent = btnMessage;
     window.loginForm.classList.toggle("hidden");
   }
 }

@@ -1,7 +1,60 @@
 $(document).ready(function() {
   //front-end and back-end js integration when?
-  highlightUser();
+  getUsers();
+  //highlightUser();
 })
+
+function getUsers() {
+  var leaderList = document.getElementById("leaders");
+  $.post('/leaderboard/getleaders', {}, function(data) {
+    console.log(data);
+    //create the list item that we stick everything
+    for (var i=0;i<data.length;i++) {
+      //console.log(data[i]);
+      leaderList.appendChild(createli(data[i]));
+    }
+  });
+}
+
+function createli(userinfo) {
+  var
+    li = document.createElement("li"),
+    headerDiv = document.createElement('div'),
+    bodyDiv = document.createElement('div'),
+    expPara = document.createElement('p'),
+    healthPara = document.createElement('p'),
+    hiddenSpan = document.createElement('span'),
+    userId = userinfo.user_id,
+    userHealth = userinfo.user_health,
+    userExp = userinfo.user_exp,
+    userName = userinfo.user_name
+  ;
+
+  if (userId == localStorage.userid) {
+    headerDiv.classList = "collapsible-header blue-grey lighten-5";
+  } else {
+    headerDiv.classList = "collapsible-header";
+  }
+  headerDiv.textContent = "User: " + userName;
+
+  bodyDiv.classList = "collapsible-body";
+
+  expPara.textContent = "Experience: " + userExp;
+
+  healthPara.textContent = "Health: " + userHealth;
+
+  hiddenSpan.classList = "hidden";
+  hiddenSpan.textcontent = userId;
+
+  bodyDiv.appendChild(expPara);
+  bodyDiv.appendChild(healthPara);
+  bodyDiv.appendChild(hiddenSpan);
+
+  li.appendChild(headerDiv);
+  li.appendChild(bodyDiv);
+
+  return li;
+}
 
 function highlightUser() {
   //firstly, we get the container that holds the list of leaders
