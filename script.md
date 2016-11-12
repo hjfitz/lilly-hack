@@ -9,6 +9,7 @@ The challenge that I decided to answer was the Health Challenge. More specifical
 I'm going to start by showing the program at work, and then I'll give a brief overview of the architecture of the program.
 
 ## Overview
+The app is essentially a todo list with rpg-esque additions. It you can create your personal sprite and gain exp. Each todo you complete gains you exp and health, set by the user.
 - Sign up, issue with signing up. log in to premade account
 - Show create, explain how it makes the app feel closer to the user and more game like, want to expand on this after the hack if and give rewards for exp
 - Show todo, show creation of todo and exp gain
@@ -17,3 +18,14 @@ I'm going to start by showing the program at work, and then I'll give a brief ov
 ## Code overview
 
 - ad lib
+
+## What I've learnt
+
+I learnt a lot about node.js, having not used it before. I was very keen on javascript which is why I picked Heroku rather than Salesforce.
+
+# Structure (Rich, FB page)
+- Video should be 5 mins
+- 10 sec Introduction
+- 45 intro on app
+- Rest of time on app use and architecture
+- 60 second *bonus round*! Explain what I've learnt throughout this hackathon

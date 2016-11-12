@@ -25,7 +25,7 @@ function removeTodo(e) {
     if (data) {
       console.log(data);
       updatePlayer(cont);
-      //location.reload(true);
+      location.reload(true);
     };
   });
 }
@@ -95,12 +95,6 @@ function getTodo(id) {
 }
 
 function addTodo(id, title, text, health, exp, todoNum) {
-  //one list item
-    // div class collapsible header $title
-    // div class collapsible body white
-      // p with $text
-      // p class exp $exp
-      // p class health $health
   var
     entryPoint  = document.getElementById("todo-list"),
     li          = document.createElement("li"),
@@ -123,20 +117,21 @@ function addTodo(id, title, text, health, exp, todoNum) {
   tickLabel.htmlFor     = "task-" + todoNum;
   tickLabel.textContent = "Done";
   tickLabel.onclick     = function() { removeTodo(this) };
-  //hacky handlinf of onclick
+  //hacky handling of onclick
   //but it would invoke automaticallf if the function(){} wasn't there.
 
 
   divHead.classList    = "collapsible-header";
   divContent.classList = "collapsible-body white";
-  expPara.classList    = "exp";
-  healthPara.classList = "health";
+  textPara.classList   = "todo"
+  expPara.classList    = "exp todo";
+  healthPara.classList = "health todo";
   hiddenInfo.classList = "hidden";
 
   divHead.textContent    = title;
   textPara.textContent   = text;
-  expPara.textContent    = exp;
-  healthPara.textContent = health;
+  expPara.textContent    = "Experience: " + exp;
+  healthPara.textContent = "Health: " + health;
   hiddenInfo.textContent = id;
 
   divHead.appendChild(tickInput);

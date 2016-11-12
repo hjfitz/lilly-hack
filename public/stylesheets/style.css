@@ -42,3 +42,16 @@ input {
   float:right!important;
   margin-top:10px;
 }
+
+.todo {
+  padding:15px 30px!important;
+}
+
+.exp, .health {
+  border-top:1px solid #eee;
+  margin:0 10px!important;
+}
+
+#leaders {
+  padding-top:30px!important;
+}

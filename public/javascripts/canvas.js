@@ -110,22 +110,8 @@ var
   shoeinput = document.getElementById("shoe_color")
 ;
 
-//$(hairinput).on('input',null,null,changeHair);
-
-//hairinput.addEventListener('oninput', changeHair);
-//eyeinput.addEventListener('input',  changeEye);
-//skinput.addEventListener('input',   changeSkin);
-//teeinput.addEventListener('input',  changeTee);
-//trouinput.addEventListener('input', changeTrou);
-//shoeinput.addEventListener('input', changeShoe);
-
-var
-  changeBtn = document.getElementById("btnChange"),
-  checkBtn = document.getElementById("btnCheck")
-;
-
+var changeBtn = document.getElementById("btnChange");
 changeBtn.addEventListener("click", changeMan);
-//checkBtn.addEventListener("click", changeMan);
 
 function changeMan(e) {
   console.log("change invoked");
@@ -170,7 +156,7 @@ function pushDB(hair,eye,skin,tee,trou,shoe) {
       trouCol: trou,
       shoeCol: shoe
     });
-
+location.reload(true);
 }
 
 $(document).ready(function() {
