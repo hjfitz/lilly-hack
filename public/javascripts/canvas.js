@@ -188,18 +188,20 @@ $(document).ready(function() {
         userId: localStorage.userid
       },
     function(data) {
-//      if (data) {
-        console.log(data);
+      if (data) {
+        console.log(data[0]);
+        data = data[0];
         skinCol    = data.skincol;
         hairCol    = data.haircol
         teeCol     = data.teecol;
         trouserCol = data.trousercol;
         eyeCol     = data.eyecol;
         shoeCol    = data.shoecol;
+        console.log(data.shoecol);
         drawMan(hairCol,skinCol,eyeCol,teeCol,trouserCol,shoeCol);
-//      } else {
-//        drawMan(hairCol,skinCol,eyeCol,teeCol,trouserCol,shoeCol);
-//      }
+      } else {
+        drawMan(hairCol,skinCol,eyeCol,teeCol,trouserCol,shoeCol);
+      }
     });
   }
 });

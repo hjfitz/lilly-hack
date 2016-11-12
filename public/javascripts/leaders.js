@@ -5,6 +5,7 @@ $(document).ready(function() {
 })
 
 function getUsers() {
+  console.log("getting users");
   var leaderList = document.getElementById("leaders");
   $.post('/leaderboard/getleaders', {}, function(data) {
     console.log(data);
