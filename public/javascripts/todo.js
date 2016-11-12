@@ -36,8 +36,8 @@ function updatePlayer(con) {
     health = parseInt(stripNonNum(attrs[1].textContent)),
     exp = parseInt(stripNonNum(attrs[2].textContent)),
     userid = localStorage.userid,
-    newExp = localStorage.userExp + exp,
-    newHealth = localStorage.userHealth + health
+    newExp = parseInt(localStorage.userExp) + exp,
+    newHealth = parseInt(localStorage.userHealth) + health
   ;
   console.log(newHealth);
   console.log(health);

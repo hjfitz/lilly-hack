@@ -29,6 +29,10 @@ router.get('/todo/add', function(request, response, next) {
   response.render('add', {title: 'Add a To-do'});
 });
 
+router.get('/logout', function(request, response, next) {
+  response.render('logout', {title: 'logout' });
+});
+
 router.get('/leaderboard', function(request, response, next) {
   var qry = squel.select()
                  .from("USERS")
