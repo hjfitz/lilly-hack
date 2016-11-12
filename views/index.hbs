@@ -1,5 +1,6 @@
-<h1>{{title}}</h1>
-<p>Welcome to {{title}}</p>
+<div class=center>
+<h1>Welcome!</h1>
+<p>Welcome to {{title}}.</p>
 <p>Do you already have an account?</p>
 <a class="waves-effect waves-light btn light-green" id="btnYes"><i class="material-icons medium right">done</i>Yes</a>
 <a class="waves-effect waves-light btn red lighten-1" id="btnNo"><i class="material-icons medium right">close</i>No</a>
@@ -20,11 +21,12 @@
   </form>
 <a class="waves-effect waves-light btn" id="btnSub">Submit</a>
 </div>
+</div>
 <div id=errorbox class="card hidden" >
   <div class="col s12 m6">
-    <div class="card red darken-3">
+    <div id="statCard" class="card red darken-3">
      <div class="card-content white-text">
-       <span class="card-title">Error</span>
+       <span id="statTitle" class="card-title">Error</span>
        <p id=error>error text goes here</p>
        <p id=errorDebug></p>
      </div>

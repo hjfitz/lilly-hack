@@ -74,13 +74,23 @@ function submit() {
         uName: userName,
         uPass: userPass,
         type:  isCreate
-      },
-      function(data){
+      }, function(data){
         //location.reload(true);  //reload the page from server (not cache)
         console.log(data);
-
-      });
+        //window.errorBox.classList.toggle("hidden");
+        welcome(userName);
+      }
+    );
   }
+}
 
-
+function welcome(user) {
+  if (window.errorbox.classList[1]) {
+    window.statCard.classList = "card blue-grey lighten-1";
+    window.errorbox.classList = "card";
+    window.statTitle.textContent = "Welcome!";
+    window.error.textContent = "Welcome, " + user;
+    window.errorDebug.textContent = "Click login to continue to login!";
+    window.loginForm.classList.toggle("hidden");
+  }
 }
