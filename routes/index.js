@@ -29,6 +29,32 @@ router.get('/todo/add', function(request, response, next) {
   response.render('add', {title: 'Add a To-do'});
 });
 
+router.get('/leaderboard', function(request, response, next) {
+  var qry = squel.select()
+                 .from("USERS")
+                 .field("user_id")
+                 .field("user_name")
+                 .field("user_health")
+                 .field("user_exp")
+                 .order("user_exp", false)
+                 .toString() + ";";
+  var results = [];
+  pg.connect(process.env.DATABASE_URL, function(err, client) {
+    if (err) throw err;
+    client.query(qry).on('row', function(data) {
+      results.push(data);
+    }).on('end', function() {
+      response.render('leaderboard',
+        {
+          title: 'leaderboard',
+          query: qry,
+          list: results
+        });
+    })
+  });
+
+});
+
 router.post('/todo/add/new',
   function(req, response, next) {
     var results = [];

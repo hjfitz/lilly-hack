@@ -18,6 +18,11 @@
       $(document).ready(
         function() {
           $(".button-collapse").sideNav();
+          if (localStorage.userid) {
+            window.userHolder.textContent = "welcome, " + localStorage.username;
+            window.userLogin.classList.toggle("hidden");
+            window.userLogout.classList.toggle("hidden");
+          }
       });
 
       $('.button-collapse').sideNav({
@@ -26,7 +31,9 @@
         closeOnClick: true, // Closes side-nav on <a> clicks, useful for Angular/Meteor
         draggable: true // Choose whether you can drag to open on touch screens
       }
-);</script>
+
+      );
+    </script>
     <!-- Setup the viewport -->
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
     <meta charset="utf-8">
@@ -37,6 +44,11 @@
       <div class="nav-wrapper red darken-3">
         <a href="#!" class="brand-logo center ">The Health Challenge</a>
         <a href="#" data-activates="mobile-demo" class="button-collapse"><i class="material-icons">menu</i></a>
+        <ul class="left hide-on-med-and-down">
+          <li><a href="#" id="userHolder">Welcome</a></li>
+          <li><a id="userLogout" class="hidden" href="/logout">Logout?</a></li>
+          <li><a id="userLogin" href="/">Login</a></li>
+        </ul>
         <ul class="right hide-on-med-and-down">
           <li><a href="/">Home</a></li>
           <li><a href="/create">Create</a></li>
@@ -71,7 +83,7 @@
       </a>
       <ul>
         <li class="waves-effect waves-light"><a href="/"><i class="material-icons">supervisor_account</i>Login</a></li>
-        <li class="waves-effect waves-light"><a href="#!"><i class="material-icons">lock_outline</i>Logout</a></li>
+        <li class="waves-effect waves-light"><a href="/logout"><i class="material-icons">lock_outline</i>Logout</a></li>
       </ul>
     </div>
   </body>

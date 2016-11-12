@@ -1,0 +1,18 @@
+<header>
+  <h1>{{title}}</h1>
+</header>
+
+<ul id="leaders" class="collapsible popout" data-collapsible="accordion">
+{{#each list}}
+    <li>
+      <div class="collapsible-header">User: {{this.user_name}}</div>
+      <div class="collapsible-body">
+        <p>Experience: {{this.user_exp}}</p>
+        <p>Health: {{this.user_health}}</p>
+        <span class="hidden">{{this.user_id}}</span>
+      </div>
+    </li>
+{{/each}}
+</ul>
+
+<script src="/javascripts/leaders.js"></script>
