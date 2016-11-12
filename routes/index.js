@@ -39,6 +39,7 @@ router.post('/create/checkuser', function(request, response, next) {
     }).on('end', function() {
       response.send(results);
     });
+    pg.end();
   });
 });
 
@@ -59,6 +60,7 @@ router.post('/leaderboard/getleaders', function( request, response, next) {
     }).on('end', function() {
       response.send(results);
     });
+    pg.end();
   });
 });
 
@@ -79,6 +81,7 @@ router.post('/todo/add/new',
       client.query(qry).on('end', function() {
         response.send("successfully inserted!");
       });
+      pg.end();
   });
 });
 
@@ -93,6 +96,7 @@ router.post('/todo/del',
       client.query(qry).on('end', function() {
         res.send("success");
       });
+      pg.end();
     });
   }
 );
@@ -111,6 +115,7 @@ router.post('/create/updateAtrs',
       client.query(qry).on('end', function() {
               res.send("success");
       });
+      pg.end();
     });
   }
 );
@@ -144,6 +149,7 @@ router.post('/create/login',
         }).on('end', function() {
           res.send(results);
         });
+        pg.end();
    });
 });
 
@@ -170,6 +176,7 @@ router.post('/insert/create', function(req, res) {
        .query(qry).on('end', function(){
          res.send('success');
        });
+       pg.end();
    });
 });
 
@@ -212,6 +219,7 @@ router.post('/create/update', function (req,res) {
         client.query(updQuery);
       }
     });
+    pg.end();
   });
 });
 
@@ -228,6 +236,7 @@ router.post('/create/getinfo', function(req,res) {
     }).on('end', function() {
       res.send(results);
     });
+    pg.end();
   });
 });
 
@@ -244,6 +253,7 @@ router.post('/todo/gettodo', function(request, response) {
     }).on('end', function(result) {
       response.send(results);
     });
+pg.end();
   });
 });
 
