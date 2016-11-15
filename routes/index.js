@@ -3,7 +3,6 @@ var router = express.Router();
 var squel = require('squel');
 var pg = require('pg');
 
-
 pg.defaults.ssl = true;
 
 router.get('/', function(req, res, next) {
