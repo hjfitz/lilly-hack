@@ -8,7 +8,7 @@
 CREATE TABLE USERS (
   user_id      SERIAL      NOT NULL PRIMARY KEY,
   user_name    VARCHAR(30) NOT NULL,
-  user_pass    VARCHAR(30) NOT NULL,
+  user_pass    VARCHAR(32) NOT NULL,
   user_created DATE        NOT NULL, --there is literally no point in keeping this.... for now...
   user_health  INT         NOT NULL,
   user_exp     INT         NOT NULL

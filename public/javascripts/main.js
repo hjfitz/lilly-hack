@@ -33,7 +33,7 @@ function hideError() {
 function submit() {
   var isCreate;
   userName = document.getElementById("user_name").value;
-  userPass = document.getElementById("pass").value;
+  userPass = md5(document.getElementById("pass").value);
   if (subBtn.textContent == "Login") {
     console.log("logging in");
     isCreate = "login";
